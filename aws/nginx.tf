@@ -8,3 +8,7 @@ resource "aws_instance" "nginx" {
   ami           = "ami-9557e0ed"
   instance_type = "t2.micro"    
 }
+
+resource "aws_eip" "ip" {
+  instance = "${aws_instance.nginx.id}"
+}
