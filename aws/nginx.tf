@@ -5,6 +5,6 @@ provider "aws" {
 }
 
 resource "aws_instance" "nginx" {
-  ami           = "ami-3552e54d"
+  ami           = ""
   instance_type = "t2.micro"    
 }
