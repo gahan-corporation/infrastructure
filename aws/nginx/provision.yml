@@ -1,0 +1,7 @@
+---
+- hosts: nginx
+  tasks:
+    - name: 'Update package list.'
+      pacman:
+        update_cache: 'yes'
+...
