@@ -44,9 +44,9 @@
     - name: "Clone infrastructure repository."
       git:
         clone: "yes"
-        repo: git@github.com:gahan-corporation/infrastructure.git
+        repo: https://github.com/gahan-corporation/infrastructure.git
         dest: /srv/infrastructure
-        recursive: "yes"
+      become: 'yes'
     - file:
         dest: /srv/infrastructure
         owner: duchess
