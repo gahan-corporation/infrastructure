@@ -8,8 +8,11 @@
         update_cache: "yes"
     - name: "Install Docker."
       pacman:
-        name: docker
+        name: "{{ item }}"
         state: "present"
+      with_items:
+        - docker
+        - polkit
       tags: docker
     - name: "Create wheel."
       group:

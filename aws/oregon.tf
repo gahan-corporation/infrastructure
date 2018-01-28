@@ -34,7 +34,7 @@ resource "aws_instance" "do" {
   }
   provisioner "remote-exec" {
     inline = [
-      "pacman -Syyu --noconfirm python",
+      "pacman -S --noconfirm python",
       "pacman -S --noconfirm wget",
       "wget https://bootstrap.pypa.io/get-pip.py",
       "python get-pip.py",
