@@ -45,7 +45,6 @@
         clone: "yes"
         repo: git@github.com:gahan-corporation/infrastructure.git
         dest: /srv/infrastructure
-        branch: iss5
     - file:
         dest: /srv/infrastructure
         owner: duchess
