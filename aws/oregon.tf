@@ -55,5 +55,10 @@ resource "aws_instance" "do" {
     inline = [
       "shutdown -r now"
     ]
+    connection {
+      type = "ssh"
+      user = "root"
+      private_key = "${file("/Users/duchess/Documents/keys/general_disarray.pem")}"
+    }
   }
 }
