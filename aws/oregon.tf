@@ -21,13 +21,9 @@ resource "aws_instance" "docker" {
   ami = "ami-9557e0ed"
   instance_type = "t2.micro"
   key_name = "general_disarray"
-  ebs_block_device {
-    device_name = "/dev/sda1"
+  root_block_device {
     volume_size = 100
     volume_type = "standard"
-    tags {
-      Name = "docker"
-    }
   }
   tags {
     Name = "docker"
