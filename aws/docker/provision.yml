@@ -13,6 +13,8 @@
       with_items:
         - docker
         - polkit
+        - vim
+        - git
       tags: docker
     - name: "Create wheel."
       group:
@@ -38,8 +40,4 @@
         src: sudoers
         dest: /etc/sudoers
       tags: sudoers
-    - name: "Start Docker."
-      service:
-        name: docker
-        state: started
 ...
