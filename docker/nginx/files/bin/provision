@@ -1,5 +1,5 @@
 #!/bin/bash
-echo $VAULT > /etc/ansible/vault
-ansible -m setup localhost
-ansible-playbook /tmp/provision.yml 
+echo "provision"
+ansible-playbook --vault-id /etc/ansible/vault /tmp/provision.yml 
+echo "end provision, start nginx"
 exec nginx -g 'daemon off;'

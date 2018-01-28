@@ -19,6 +19,10 @@ resource "docker_container" "nginx" {
     host_path = "/Users/duchess/Documents/gahan-corporation/department-of-information/infrastructure/docker/nginx/files/etc"
     container_path = "/etc/nginx"
   }
+  volumes {
+    host_path = "/etc/ansible/vault"
+    container_path = "/etc/ansible/vault"
+  }
   ports {
     internal = "80"
     external = "80"
