@@ -1,0 +1,47 @@
+---
+- name: "Install Docker and add a user."
+  hosts: do
+  tasks:
+    - name: "Update hostname."
+      hostname:
+        name: do.gahan-corporation.com
+    - name: "Update package list, upgrade system."
+      pacman:
+        upgrade: "yes"
+        update_cache: "yes"
+    - name: "Install Docker."
+      pacman:
+        name: "{{ item }}"
+        state: "present"
+      with_items:
+        - ncurses
+        - docker
+        - polkit
+        - vim
+        - git
+      tags: docker
+    - name: "Create wheel."
+      group:
+        name: wheel
+        state: present
+      tags: user
+    - name: "Create a user."
+      user:
+        name: duchess
+        state: present
+        group: docker
+        groups: wheel
+        home: /home/duchess
+        shell: /bin/bash
+      tags: user
+    - name: "Allow remote login for user."
+      authorized_key:
+        user: duchess
+        key: "{{ lookup('file', '/Users/duchess/.ssh/id_rsa.pub') }}"
+        state: present
+    - name: "Update sudoers."
+      copy:
+        src: sudoers
+        dest: /etc/sudoers
+      tags: sudoers
+...
