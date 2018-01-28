@@ -7,16 +7,17 @@
       copy:
         src: sshd_config
         dest: /etc/ssh/sshd_config
-    - name: "Copy bashrc."
-      copy:
-        src: bashrc
-        dest: /home/duchess/.bashrc
+      become: "yes"
     - name: "Enable Docker."
       service:
         name: docker
         state: started
         enabled: 'yes'
       become: 'yes'
+    - name: "Copy bashrc."
+      copy:
+        src: bashrc
+        dest: /home/duchess/.bashrc
     - name: "Source bashrc."
       lineinfile:
         dest: /home/duchess/.bash_profile
