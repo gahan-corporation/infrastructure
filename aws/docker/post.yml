@@ -23,4 +23,35 @@
         dest: /home/duchess/.bash_profile
         state: present
         line: "source ~/.bashrc"
+    - name: "Download terraform."
+      get_url:
+        url: http://bit.ly/2DJMRrD
+        dest: /tmp/terraform.zip
+    - name: "Unzip terraform."
+      unarchive:
+        src: /tmp/terraform.zip
+        dest: /usr/bin
+    - name: "Set executable on terraform."
+      file:
+        dest: /usr/bin/terraform
+        owner: duchess
+        group: docker
+        mode: ug+x
+        state: file
+      become: "yes"
+    - name: "Clone infrastructure repository."
+      git:
+        clone: "yes"
+        repo: git@github.com:gahan-corporation/infrastructure.git
+        dest: /srv/infrastructure
+    - file:
+        dest: /srv/infrastructure
+        owner: duchess
+        group: docker
+        recurse: "yes"
+        state: directory
+      become: "yes"
+    - shell: terraform plan
+      args:
+        chdir: /srv/infrastructure/docker
 ...
