@@ -3,46 +3,38 @@
   hosts: all
   tasks:
     - wait_for_connection:
-    - name: "Copy slightly more secure sshd."
-      copy:
+    - copy:
         src: sshd_config
         dest: /etc/ssh/sshd_config
       become: "yes"
-    - name: "Enable Docker."
-      service:
+    - service:
         name: docker
         state: started
         enabled: 'yes'
       become: 'yes'
-    - name: "Copy bashrc."
-      copy:
+    - copy:
         src: bashrc
         dest: /home/duchess/.bashrc
-    - name: "Source bashrc."
-      lineinfile:
+    - lineinfile:
         dest: /home/duchess/.bash_profile
         state: present
         line: "source ~/.bashrc"
-    - name: "Download terraform."
-      get_url:
+    - get_url:
         url: http://bit.ly/2DJMRrD
         dest: /tmp/terraform.zip
-    - name: "Unzip terraform."
-      unarchive:
+    - unarchive:
         src: /tmp/terraform.zip
         dest: /usr/bin
         copy: "no"
       become: "yes"
-    - name: "Set executable on terraform."
-      file:
+    - file:
         dest: /usr/bin/terraform
         owner: duchess
         group: docker
         mode: ug+x
         state: file
       become: "yes"
-    - name: "Clone infrastructure repository."
-      git:
+    - git:
         clone: "yes"
         repo: https://github.com/gahan-corporation/infrastructure.git
         dest: /srv/infrastructure
