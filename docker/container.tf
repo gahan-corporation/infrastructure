@@ -3,8 +3,7 @@ provider "docker" {
 }
 
 resource "docker_volume" "etc-nginx" {
-  host_path = "nginx/files/etc"
-  container_path = "/etc/nginx"
+  name = "etc"
 }
 
 resource "docker_network" "gcorpnet" {
@@ -15,6 +14,11 @@ resource "docker_container" "nginx" {
   image = "${docker_image.di-nginx.name}"
   name  = "nginx"
   networks = ["gcorp"]
+  publish_all_ports = "true"
+  volumes {
+    host_path = "/Users/duchess/Documents/gahan-corporation/department-of-information/infrastructure/docker/nginx/files/etc"
+    container_path = "/etc/nginx"
+  }
 }
 
 resource "docker_image" "di-nginx" {
