@@ -1,12 +1,13 @@
 ---
 - name: "Wait for rebooted host."
   hosts: all
+  gather_facts: "no"
   tasks:
     - wait_for_connection:
     - name: "Ping!"
       ping:
       register: result
-      until: result.ping == pong
+      until: result.ping == 'pong'
       retries: 30
       delay: 10
       delegate_to: localhost
