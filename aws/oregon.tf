@@ -18,7 +18,7 @@ resource "aws_key_pair" "general-disarray" {
 }
 
 resource "aws_instance" "do" {
-  ami = "ami-9557e0ed"
+  ami = "ami-3552e54d"
   instance_type = "t2.micro"
   key_name = "general_disarray"
   availability_zone = "us-west-2c"
@@ -34,10 +34,6 @@ resource "aws_instance" "do" {
   }
   provisioner "remote-exec" {
     inline = [
-      "dhcpcd",
-      "ip addr",
-      "traceroute 8.8.8.8",
-      "ping -c 3 www.google.com",
       "pacman -Syyu --noconfirm python",
       "pacman -S --noconfirm wget",
       "wget https://bootstrap.pypa.io/get-pip.py",
