@@ -26,9 +26,6 @@ resource "aws_instance" "do" {
     volume_size = 100
     volume_type = "standard"
   }
-  volume_tags {
-    Name = "docker"
-  }
   tags {
     Name = "docker"
   }
