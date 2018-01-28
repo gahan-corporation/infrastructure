@@ -2,10 +2,13 @@
 - name: "Install Docker and add a user."
   hosts: do
   tasks:
+    - name: "Update package list, upgrade system."
+      pacman:
+        upgrade: "yes"
+        update_cache: "yes"
     - name: "Install Docker."
       pacman:
-        update_cache: "yes"
-        name: "docker"
+        name: docker
         state: "present"
       tags: docker
     - name: "Create wheel."
@@ -17,6 +20,7 @@
       user:
         name: duchess
         state: present
+        group: docker
         groups: wheel
         home: /home/duchess
         shell: /bin/bash
@@ -30,4 +34,9 @@
       copy:
         src: sudoers
         dest: /etc/sudoers
+      tags: sudoers
+    - name: "Start Docker."
+      service:
+        name: docker
+        state: started
 ...
