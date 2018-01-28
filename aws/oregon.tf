@@ -5,6 +5,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "oregon" {
+  ami = "ami-9abea4fb"
   instance_type = "t2.large"
 }
 
