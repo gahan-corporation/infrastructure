@@ -53,12 +53,14 @@ resource "aws_instance" "do" {
   }
   provisioner "remote-exec" {
     inline = [
-      "shutdown -r now"
+      "sudo shutdown -r now"
     ]
     connection {
       type = "ssh"
-      user = "root"
-      private_key = "${file("/Users/duchess/Documents/keys/general_disarray.pem")}"
+      user = "duchess"
     }
+  }
+  provisioner "local-exec" {
+    command = "ansible-playbook -i '${aws_instance.do.public_ip},' docker/post.yml"
   }
 }
