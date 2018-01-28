@@ -22,7 +22,7 @@ resource "aws_instance" "oregon" {
   instance_type = "t2.large"
 
   tags {
-    name = "oregon"
+    Name = "oregon"
   }
 }
 
@@ -31,9 +31,13 @@ resource "aws_instance" "docker" {
   instance_type = "t2.micro"
   key_name = "general_disarray"
 
+  tags {
+    Name = "docker"
+  }
+
   provisioner "local-exec" {
     command = "nginx/provision.yml" 
-    interpreter = "~/.ansible/bin/ansible-playbook"
+    interpreter = ["~/.ansible/bin/ansible-playbook"]
   }
 }
 
