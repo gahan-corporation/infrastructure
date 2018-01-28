@@ -19,6 +19,7 @@
         - polkit
         - vim
         - git
+        - unzip
       tags: docker
     - name: "Create wheel."
       group:
