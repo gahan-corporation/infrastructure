@@ -32,6 +32,7 @@
         src: /tmp/terraform.zip
         dest: /usr/bin
         copy: "no"
+      become: "yes"
     - name: "Set executable on terraform."
       file:
         dest: /usr/bin/terraform
