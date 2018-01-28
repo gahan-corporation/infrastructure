@@ -17,3 +17,5 @@ RUN pip install ansible
 RUN ansible -m lineinfile -a 'dest=/etc/ansible/hosts line="localhost ansible_connection=local" create=yes state=present' localhost
 COPY files/ssl/private/star.gahan-corporation.key /etc/ssl/private/star.gahan-corporation.vault
 COPY files/ssl/private/pass.keys /etc/ssl/private/pass.keys
+COPY files/bin/provision /usr/bin/provision
+CMD /usr/bin/provision
