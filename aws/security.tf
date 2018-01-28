@@ -1,22 +1,6 @@
-resource "aws_security_group" "mail" {
-  name        = "mail"
-  description = "Mail ports."
-
-  ingress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
-    cidr_blocks = ["172.17.0.1/32"]
-  }
-
-  tags {
-    Name = "mail"
-  }
-}
-
 resource "aws_security_group" "default" {
-  name = "default"
-  description = "Default security group."
+  description = "default VPC security group"
+  vpc_id = "vpc-71fff513"
   ingress {
     from_port = 80
     to_port = 80

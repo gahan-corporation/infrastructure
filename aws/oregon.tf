@@ -19,8 +19,8 @@ resource "aws_key_pair" "general-disarray" {
 
 resource "aws_instance" "oregon" {
   ami = "ami-9abea4fb"
-  instance_type = "t2.large"
-
+  instance_type = "t2.micro"
+  security_groups = ["default"]
   tags {
     Name = "oregon"
   }
@@ -35,11 +35,12 @@ resource "aws_instance" "docker" {
     volume_size = 100
     volume_type = "standard"
   }
-
   tags {
     Name = "docker"
   }
-
+  provisioner "local-exec" {
+    command = "ansible -m lineinfile -a 'line=\"${aws_instance.docker.public_ip} docker\" dest=/etc/hosts state=present' -b localhost"
+  }
   provisioner "local-exec" {
     command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.docker.public_ip},' docker/provision.yml"
   }
