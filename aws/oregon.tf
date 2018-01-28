@@ -31,6 +31,7 @@ resource "aws_instance" "docker" {
   instance_type = "t2.micro"
   key_name = "general_disarray"
   ebs_block_device {
+    device_name = "/dev/sda1"
     volume_size = 100
     volume_type = "standard"
   }
@@ -40,7 +41,7 @@ resource "aws_instance" "docker" {
   }
 
   provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.docker.public_ip},' docker/provision.yml"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.docker.public_ip},' docker/provision.yml"
   }
 }
 
