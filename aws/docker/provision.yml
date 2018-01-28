@@ -1,10 +1,10 @@
 ---
 - name: "Install Docker and add a user."
-  hosts: do
+  hosts: all
   tasks:
     - name: "Update hostname."
       hostname:
-        name: do.gahan-corporation.com
+        name: gahan-corporation.com
     - name: "Update package list, upgrade system."
       pacman:
         upgrade: "yes"
@@ -19,6 +19,7 @@
         - polkit
         - vim
         - git
+        - unzip
       tags: docker
     - name: "Create wheel."
       group:

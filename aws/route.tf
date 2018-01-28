@@ -7,7 +7,8 @@ resource "aws_route53_record" "all" {
   name    = "*.${data.aws_route53_zone.gc.name}"
   type    = "A"
   ttl     = "60"
-  records = ["${aws_eip.ip}"]
+  records = ["${aws_eip.ip.public_ip}"]
+  depends_on = ["aws_eip.ip"]
 }
 
 resource "aws_route53_record" "bare" {
@@ -15,7 +16,7 @@ resource "aws_route53_record" "bare" {
   name    = "${data.aws_route53_zone.gc.name}"
   type    = "A"
   ttl     = "60"
-  records = ["aws_eip.ip"]
+  records = ["${aws_eip.ip.public_ip}"]
 }
 
 resource "aws_route53_record" "aspmx" {

@@ -1,0 +1,59 @@
+---
+- name: "Docker and minor updates."
+  hosts: all
+  tasks:
+    - wait_for_connection:
+    - name: "Copy slightly more secure sshd."
+      copy:
+        src: sshd_config
+        dest: /etc/ssh/sshd_config
+      become: "yes"
+    - name: "Enable Docker."
+      service:
+        name: docker
+        state: started
+        enabled: 'yes'
+      become: 'yes'
+    - name: "Copy bashrc."
+      copy:
+        src: bashrc
+        dest: /home/duchess/.bashrc
+    - name: "Source bashrc."
+      lineinfile:
+        dest: /home/duchess/.bash_profile
+        state: present
+        line: "source ~/.bashrc"
+    - name: "Download terraform."
+      get_url:
+        url: http://bit.ly/2DJMRrD
+        dest: /tmp/terraform.zip
+    - name: "Unzip terraform."
+      unarchive:
+        src: /tmp/terraform.zip
+        dest: /usr/bin
+        copy: "no"
+    - name: "Set executable on terraform."
+      file:
+        dest: /usr/bin/terraform
+        owner: duchess
+        group: docker
+        mode: ug+x
+        state: file
+      become: "yes"
+    - name: "Clone infrastructure repository."
+      git:
+        clone: "yes"
+        repo: git@github.com:gahan-corporation/infrastructure.git
+        dest: /srv/infrastructure
+        branch: iss5
+    - file:
+        dest: /srv/infrastructure
+        owner: duchess
+        group: docker
+        recurse: "yes"
+        state: directory
+      become: "yes"
+    - shell: terraform plan
+      args:
+        chdir: /srv/infrastructure/docker
+...

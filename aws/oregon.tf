@@ -19,6 +19,7 @@ resource "aws_key_pair" "general-disarray" {
 
 resource "aws_eip" "ip" {
   instance = "${aws_instance.do.id}"
+  depends_on = ["aws_instance.do"]
 }
 
 resource "aws_instance" "do" {
@@ -35,7 +36,7 @@ resource "aws_instance" "do" {
   }
   provisioner "remote-exec" {
     inline = [
-      "pacman -S --noconfirm python",
+      "pacman -Syy --noconfirm python",
       "pacman -S --noconfirm wget",
       "wget https://bootstrap.pypa.io/get-pip.py",
       "python get-pip.py",
@@ -48,11 +49,12 @@ resource "aws_instance" "do" {
     }
   }
   provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.do.public_ip},' docker/provision.yml"
+    command = "ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.do.public_ip},' docker/provision.yml"
   }
-  provisioner "remote-exec" {
-    inline = [
-      "shutdown -r now"
-    ]
+  provisioner "local-exec" {
+    command = "ssh -t ${aws_instance.do.public_ip} sudo shutdown -r now; ansible-playbook -i '${aws_instance.do.public_ip},' docker/reboot.yml"
+  }
+  provisioner "local-exec" {
+    command = "ansible-playbook -i '${aws_instance.do.public_ip},' docker/post.yml"
   }
 }
