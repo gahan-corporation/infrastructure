@@ -1,6 +1,9 @@
 ---
 - hosts: localhost
   tasks:
+    - copy:
+        src: /tmp/star.gahan-corporation.key
+        dest: /etc/ssl/private/star.gahan-corporation.key
     - debug:
-        msg: "Yup"
+        var: hostvars 
 ...
