@@ -1,7 +1,8 @@
 ---
 - name: "Docker and minor updates."
-  hosts: do
+  hosts: all
   tasks:
+    - wait_for_connection:
     - name: "Copy slightly more secure sshd."
       copy:
         src: sshd_config

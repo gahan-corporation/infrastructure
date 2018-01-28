@@ -52,7 +52,7 @@ resource "aws_instance" "do" {
     command = "ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.do.public_ip},' docker/provision.yml"
   }
   provisioner "local-exec" {
-    command = "ssh -t ${aws_instance.do.public_ip} sudo shutdown -r now; ansible-playbook -i '${aws_instance.do.public_ip},' docker/reboot.yml || true" 
+    command = "ssh -t ${aws_instance.do.public_ip} sudo shutdown -r now; sleep 1"
   }
   provisioner "local-exec" {
     command = "ansible-playbook -i '${aws_instance.do.public_ip},' docker/post.yml"

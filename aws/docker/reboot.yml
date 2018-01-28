@@ -6,8 +6,10 @@
     - name: "Ping!"
       ping:
       register: result
-      until: result.rc == 0
+      until: result.ping == pong
       retries: 30
       delay: 10
       delegate_to: localhost
+    - debug:
+        var: result
 ...
