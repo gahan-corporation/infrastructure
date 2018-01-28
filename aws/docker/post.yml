@@ -34,19 +34,19 @@
         mode: ug+x
         state: file
       become: "yes"
-    - git:
-        clone: "yes"
-        repo: https://github.com/gahan-corporation/infrastructure.git
-        dest: /srv/infrastructure
-      become: 'yes'
-    - file:
-        dest: /srv/infrastructure
-        owner: duchess
-        group: docker
-        recurse: "yes"
-        state: directory
-      become: "yes"
-    - shell: terraform plan
-      args:
-        chdir: /srv/infrastructure/docker
+      # - git:
+      # clone: "yes"
+      #    repo: https://github.com/gahan-corporation/infrastructure.git
+      #    dest: /srv/infrastructure
+      #  become: 'yes'
+      # - file:
+      #    dest: /srv/infrastructure
+      #    owner: duchess
+      #    group: docker
+      #   recurse: "yes"
+      #   state: directory
+      # become: "yes"
+      # - shell: terraform plan
+      #  args:
+      #    chdir: /srv/infrastructure/docker
 ...
