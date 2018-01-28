@@ -49,4 +49,9 @@ resource "aws_instance" "do" {
   provisioner "local-exec" {
     command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.do.public_ip},' docker/provision.yml"
   }
+  provisioner "remote-exec" {
+    inline = [
+      "shutdown -r now"
+    ]
+  }
 }
