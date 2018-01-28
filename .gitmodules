@@ -1,3 +1,0 @@
-[submodule "netdata"]
-	path = netdata
-	url = ./netdata/
