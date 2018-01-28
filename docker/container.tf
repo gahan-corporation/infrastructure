@@ -19,6 +19,16 @@ resource "docker_container" "nginx" {
     host_path = "/Users/duchess/Documents/gahan-corporation/department-of-information/infrastructure/docker/nginx/files/etc"
     container_path = "/etc/nginx"
   }
+  ports {
+    internal = "80"
+    external = "80"
+    ip = "0.0.0.0"
+  }
+  ports {
+    internal = "443"
+    external = "443"
+    ip = "0.0.0.0"
+  }
 }
 
 resource "docker_image" "di-nginx" {
