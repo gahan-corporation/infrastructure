@@ -3,10 +3,10 @@ provider "docker" {
 }
 
 resource "docker_container" "nginx" {
-  image = "${docker_image.gc.latest}"
+  image = "${docker_image.di-nginx.name}"
   name  = "nginx"
 }
 
-resource "docker_image" "gc" {
-  name = "gcorp:nginx"
+resource "docker_image" "di-nginx" {
+  name          = "gcorp/nginx:iss5" 
 }
