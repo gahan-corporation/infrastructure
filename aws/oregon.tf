@@ -17,6 +17,10 @@ resource "aws_key_pair" "general-disarray" {
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCraOI8EdofAFS57yfO13TRFSWb2Xpcr4SpjuhSRlSOz0YX3wax3kxGaZgFPqYX7nhptOj6+zbsPMXrZioK/ScgoEVInWMyr5dQA70AKmYKD7I9CYejLop5cTxwCuJHfbiBD4xyw+rdKs/SH55zj+k7oKvFFlndP6sImMvfaUQIDimxcMEud7SMDKwYA6MwRe6gA+uSzLKaUZmepWx/OnunJRl36vu07fXT5snizKv2iVSSt8qxv2QEE1iMCied/QlGSOEjF9qxeiqlE0KGZ573Ms4AIHyjJbfzKnsgM67rfss91KYffZ18V17xM/SzyUjcO/w45VYAEWNVQggtXiFZ general_disarray"
 }
 
+resource "aws_eip" "ip" {
+  instance = "${aws_instance.do.id}"
+}
+
 resource "aws_instance" "do" {
   ami = "ami-3552e54d"
   instance_type = "t2.micro"
