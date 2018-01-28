@@ -49,7 +49,7 @@ resource "aws_instance" "do" {
     }
   }
   provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.do.public_ip},' docker/provision.yml; sleep 120"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.do.public_ip},' docker/provision.yml"
   }
   provisioner "local-exec" {
     command = "ansible-playbook -i '${aws_instance.do.public_ip},' docker/post.yml"
