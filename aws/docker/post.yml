@@ -10,7 +10,8 @@
       service:
         name: docker
         state: started
-        enable: 'yes'
+        enabled: 'yes'
+      become: 'yes'
     - name: "Source bashrc."
       lineinfile:
         dest: /home/duchess/.bash_profile

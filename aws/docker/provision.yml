@@ -44,8 +44,8 @@
         src: sudoers
         dest: /etc/sudoers
       tags: sudoers
-    - name: "Add bashrc."
+    - name: "Copy slightly more secure sshd."
       copy:
-        src: bashrc
-        dest: /home/duchess/.bashrc
+        src: sshd_config
+        dest: /etc/ssh/sshd_config
 ...
