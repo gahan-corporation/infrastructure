@@ -1,0 +1,13 @@
+---
+- name: "Wait for rebooted host."
+  hosts: all
+  tasks:
+    - wait_for_connection:
+    - name: "Ping!"
+      ping:
+      register: result
+      until: result.rc == 0
+      retries: 30
+      delay: 10
+      delegate_to: localhost
+...
