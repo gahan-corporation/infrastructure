@@ -1,5 +1,5 @@
 ---
-- hosts: nginx
+- hosts: all 
   tasks:
     - name: 'Update package list.'
       pacman:
