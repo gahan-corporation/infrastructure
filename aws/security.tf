@@ -1,6 +1,5 @@
 resource "aws_security_group" "default" {
   description = "default VPC security group"
-  vpc_id = "vpc-71fff513"
   ingress {
     from_port = 80
     to_port = 80

@@ -17,7 +17,7 @@ resource "aws_key_pair" "general-disarray" {
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCraOI8EdofAFS57yfO13TRFSWb2Xpcr4SpjuhSRlSOz0YX3wax3kxGaZgFPqYX7nhptOj6+zbsPMXrZioK/ScgoEVInWMyr5dQA70AKmYKD7I9CYejLop5cTxwCuJHfbiBD4xyw+rdKs/SH55zj+k7oKvFFlndP6sImMvfaUQIDimxcMEud7SMDKwYA6MwRe6gA+uSzLKaUZmepWx/OnunJRl36vu07fXT5snizKv2iVSSt8qxv2QEE1iMCied/QlGSOEjF9qxeiqlE0KGZ573Ms4AIHyjJbfzKnsgM67rfss91KYffZ18V17xM/SzyUjcO/w45VYAEWNVQggtXiFZ general_disarray"
 }
 
-resource "aws_instance" "docker" {
+resource "aws_instance" "do" {
   ami = "ami-9557e0ed"
   instance_type = "t2.micro"
   key_name = "general_disarray"
@@ -26,25 +26,31 @@ resource "aws_instance" "docker" {
     volume_size = 100
     volume_type = "standard"
   }
+  volume_tags {
+    Name = "docker"
+  }
   tags {
     Name = "docker"
   }
   provisioner "remote-exec" {
     inline = [
-      "pacman -S python",
-      "",
+      "dhcpcd",
+      "ip addr",
+      "traceroute 8.8.8.8",
+      "ping -c 3 www.google.com",
+      "pacman -Syyu --noconfirm python",
+      "pacman -S --noconfirm wget",
+      "wget https://bootstrap.pypa.io/get-pip.py",
+      "python get-pip.py",
+      "rm get-pip.py",
     ]
     connection {
       type = "ssh"
       user = "root"
-      private_key = "/Users/duchess/Documents/keys/general_disarray.pem"
+      private_key = "${file("/Users/duchess/Documents/keys/general_disarray.pem")}"
     }
   }
   provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.docker.public_ip},' docker/provision.yml"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.do.public_ip},' docker/provision.yml"
   }
-}
-
-resource "aws_eip" "docker" {
-  instance = "${aws_instance.docker.id}"
 }
