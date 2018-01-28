@@ -36,8 +36,8 @@ resource "aws_instance" "docker" {
   }
 
   provisioner "local-exec" {
-    command = "nginx/provision.yml" 
-    interpreter = ["~/.ansible/bin/ansible-playbook"]
+    command = "ansible-playbook nginx/provision.yml" 
+    interpreter = ["/bin/bash","-c","source","/Users/duchess/.ansible/bin/activate"]
   }
 }
 

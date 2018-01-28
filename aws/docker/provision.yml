@@ -1,0 +1,6 @@
+---
+- hosts: docker
+  tasks:
+    - pacman:
+        update_cache: yes
+...
