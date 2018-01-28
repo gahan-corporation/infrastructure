@@ -1,6 +1,6 @@
 ---
 - name: "Install Docker and add a user."
-  hosts: do
+  hosts: all 
   tasks:
     - name: "Update hostname."
       hostname:

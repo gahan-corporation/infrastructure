@@ -19,6 +19,7 @@ resource "aws_key_pair" "general-disarray" {
 
 resource "aws_eip" "ip" {
   instance = "${aws_instance.do.id}"
+  depends_on = ["aws_instance.do"]
 }
 
 resource "aws_instance" "do" {
@@ -35,7 +36,7 @@ resource "aws_instance" "do" {
   }
   provisioner "remote-exec" {
     inline = [
-      "pacman -S --noconfirm python",
+      "pacman -Syy --noconfirm python",
       "pacman -S --noconfirm wget",
       "wget https://bootstrap.pypa.io/get-pip.py",
       "python get-pip.py",
