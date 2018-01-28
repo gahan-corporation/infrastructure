@@ -1,0 +1,19 @@
+---
+- name: "Docker and minor updates."
+  hosts: do
+  tasks:
+    - name: "Copy bashrc."
+      copy:
+        src: bashrc
+        dest: /home/duchess/.bashrc
+    - name: "Enable Docker."
+      service:
+        name: docker
+        state: started
+        enable: 'yes'
+    - name: "Source bashrc."
+      lineinfile:
+        dest: /home/duchess/.bash_profile
+        state: present
+        line: "source ~/.bashrc"
+...

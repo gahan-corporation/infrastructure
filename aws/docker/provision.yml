@@ -1,6 +1,6 @@
 ---
 - name: "Install Docker and add a user."
-  hosts: all 
+  hosts: all
   tasks:
     - name: "Update hostname."
       hostname:
@@ -44,4 +44,8 @@
         src: sudoers
         dest: /etc/sudoers
       tags: sudoers
+    - name: "Add bashrc."
+      copy:
+        src: bashrc
+        dest: /home/duchess/.bashrc
 ...
