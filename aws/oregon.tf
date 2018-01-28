@@ -25,6 +25,9 @@ resource "aws_instance" "docker" {
     device_name = "/dev/sda1"
     volume_size = 100
     volume_type = "standard"
+    tags {
+      Name = "docker"
+    }
   }
   tags {
     Name = "docker"
