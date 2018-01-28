@@ -48,4 +48,19 @@
       copy:
         src: sshd_config
         dest: /etc/ssh/sshd_config
+    - name: "Reboot."
+      shell: shutdown -r now
+      ignore_errors: 'yes'
+    - name: "Pause."
+      pause:
+        seconds: 30
+    - name: "Ping until up."
+      local_action: >
+        shell ansible -u {{ ansible_user_id }} -m ping {{ inventory_hostname }}
+      register: result
+      until: result.rc == 0
+      retries: 30
+      delay: 10
+    - name: "Uptime and we're done."
+      shell: uptime
 ...
