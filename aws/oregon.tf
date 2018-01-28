@@ -29,10 +29,11 @@ resource "aws_instance" "oregon" {
 resource "aws_instance" "docker" {
   ami = "ami-9557e0ed"
   instance_type = "t2.micro"
-  key_name = "professor-chaos"
+  key_name = "general_disarray"
 
   provisioner "local-exec" {
-    command = "ap nginx/provision.yml" 
+    command = "nginx/provision.yml" 
+    interpreter = "~/.ansible/bin/ansible-playbook"
   }
 }
 
