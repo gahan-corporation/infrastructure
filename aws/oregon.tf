@@ -21,12 +21,24 @@ resource "aws_instance" "docker" {
   ami = "ami-9557e0ed"
   instance_type = "t2.micro"
   key_name = "general_disarray"
+  availability_zone = "us-west-2c"
   root_block_device {
     volume_size = 100
     volume_type = "standard"
   }
   tags {
     Name = "docker"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "pacman -S python",
+      "",
+    ]
+    connection {
+      type = "ssh"
+      user = "root"
+      private_key = "/Users/duchess/Documents/keys/general_disarray.pem"
+    }
   }
   provisioner "local-exec" {
     command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.docker.public_ip},' docker/provision.yml"
