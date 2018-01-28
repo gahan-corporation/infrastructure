@@ -45,6 +45,7 @@
         clone: "yes"
         repo: git@github.com:gahan-corporation/infrastructure.git
         dest: /srv/infrastructure
+        recursive: "yes"
     - file:
         dest: /srv/infrastructure
         owner: duchess
