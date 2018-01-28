@@ -2,6 +2,9 @@
 - name: "Install Docker and add a user."
   hosts: do
   tasks:
+    - name: "Update hostname."
+      hostname:
+        name: do.gahan-corporation.com
     - name: "Update package list, upgrade system."
       pacman:
         upgrade: "yes"
