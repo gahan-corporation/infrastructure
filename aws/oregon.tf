@@ -36,8 +36,7 @@ resource "aws_instance" "docker" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook nginx/provision.yml" 
-    interpreter = ["/bin/bash","-c","source","/Users/duchess/.ansible/bin/activate"]
+    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu --private-key ~/Documents/keys/general_disarray.pem -i '${aws_instance.docker.public_ip},' docker/provision.yml"
   }
 }
 
