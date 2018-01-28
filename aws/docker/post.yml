@@ -2,6 +2,10 @@
 - name: "Docker and minor updates."
   hosts: do
   tasks:
+    - name: "Copy slightly more secure sshd."
+      copy:
+        src: sshd_config
+        dest: /etc/ssh/sshd_config
     - name: "Copy bashrc."
       copy:
         src: bashrc

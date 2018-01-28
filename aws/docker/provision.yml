@@ -44,12 +44,8 @@
         src: sudoers
         dest: /etc/sudoers
       tags: sudoers
-    - name: "Copy slightly more secure sshd."
-      copy:
-        src: sshd_config
-        dest: /etc/ssh/sshd_config
     - name: "Reboot."
-      shell: shutdown -r now
+      shell: shutdown -r now && sleep 1
       ignore_errors: 'yes'
     - name: "Pause."
       pause:
