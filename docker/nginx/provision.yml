@@ -9,4 +9,16 @@
         dest: /etc/ssl/private/pass.keys
     - debug:
         var: hostvars
+    - git:
+        repo: https://github.com/gahan-corporation/infrastructure.git
+        clone: "yes"
+        dest: /srv/infrastructure
+    - apk:
+        update_cache: "yes"
+        name: unzip
+        state: present
+    - unarchive:
+        src: http://bit.ly/2rMNwTv
+        dest: /tmp/terrafom
+        remote_src: "yes"
 ...
