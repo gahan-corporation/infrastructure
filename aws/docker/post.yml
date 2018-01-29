@@ -34,7 +34,7 @@
         mode: ug+x
         state: file
       become: "yes"
-    - shell: terraform plan
+    - shell: terraform apply -auto-approve
       args:
         chdir: /srv/infrastructure/docker
 ...
