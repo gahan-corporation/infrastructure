@@ -19,21 +19,7 @@
         dest: /home/duchess/.bash_profile
         state: present
         line: "source ~/.bashrc"
-    - get_url:
-        url: http://bit.ly/2DJMRrD
-        dest: /tmp/terraform.zip
-    - unarchive:
-        src: /tmp/terraform.zip
-        dest: /usr/bin
-        copy: "no"
-      become: "yes"
-    - file:
-        dest: /usr/bin/terraform
-        owner: duchess
-        group: docker
-        mode: ug+x
-        state: file
-      become: "yes"
+    - shell: terraform init
     - shell: terraform apply -auto-approve
       args:
         chdir: /srv/infrastructure/docker
