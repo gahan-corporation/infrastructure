@@ -49,7 +49,7 @@
         dest: /tmp
         src: http://bit.ly/2rMNwTv
         remote_src: "yes"
-    - shell: ls -lah /tmp/terraform
+    - shell: ls -lah /tmp
       register: result
     - debug:
         var: result
