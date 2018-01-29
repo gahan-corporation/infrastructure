@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "provision"
+ansible-playbook --vault-id /tmp/bureau /tmp/provision.yml 
+echo "end provision, start nginx"
+exec nginx -g 'daemon off;'

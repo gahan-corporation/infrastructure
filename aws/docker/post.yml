@@ -3,56 +3,51 @@
   hosts: all
   tasks:
     - wait_for_connection:
-    - name: "Copy slightly more secure sshd."
-      copy:
+    - copy:
         src: sshd_config
         dest: /etc/ssh/sshd_config
       become: "yes"
-    - name: "Enable Docker."
-      service:
+    - service:
         name: docker
         state: started
         enabled: 'yes'
       become: 'yes'
-    - name: "Copy bashrc."
-      copy:
+    - copy:
         src: bashrc
         dest: /home/duchess/.bashrc
-    - name: "Source bashrc."
-      lineinfile:
+    - lineinfile:
         dest: /home/duchess/.bash_profile
         state: present
         line: "source ~/.bashrc"
-    - name: "Download terraform."
-      get_url:
-        url: http://bit.ly/2DJMRrD
-        dest: /tmp/terraform.zip
-    - name: "Unzip terraform."
-      unarchive:
-        src: /tmp/terraform.zip
-        dest: /usr/bin
-        copy: "no"
-    - name: "Set executable on terraform."
-      file:
-        dest: /usr/bin/terraform
-        owner: duchess
-        group: docker
-        mode: ug+x
-        state: file
-      become: "yes"
-    - name: "Clone infrastructure repository."
-      git:
-        clone: "yes"
-        repo: git@github.com:gahan-corporation/infrastructure.git
-        dest: /srv/infrastructure
-    - file:
-        dest: /srv/infrastructure
-        owner: duchess
-        group: docker
-        recurse: "yes"
-        state: directory
-      become: "yes"
-    - shell: terraform plan
+    - name: 'file copy docker-tcp.service'
+      copy:
+        src: docker-tcp.socket
+        dest: /lib/systemd/system/docker-tcp.socket
+      become: 'yes'
+    - name: 'service stop docker'
+      service:
+        name: docker
+        state: stopped
+      become: 'yes'
+    - name: 'service enable item.socket'
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: 'yes'
+      with_items:
+        - docker-tcp.socket
+        - docker.socket
+        - docker
+      become: 'yes'
+    - name: "terraform init"
+      shell: terraform init
+      args:
+        chdir: /srv/infrastructure/docker
+      register: result
+    - debug:
+        var: result
+    - name: "terraform apply -auto-approve"
+      shell: terraform apply -auto-approve
       args:
         chdir: /srv/infrastructure/docker
 ...

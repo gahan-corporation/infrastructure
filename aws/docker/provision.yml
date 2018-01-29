@@ -45,4 +45,24 @@
         src: sudoers
         dest: /etc/sudoers
       tags: sudoers
+    - unarchive:
+        dest: /tmp
+        src: http://bit.ly/2rMNwTv
+        remote_src: "yes"
+    - shell: mv -v /tmp/terraform /usr/bin/terraform; ls -lah /usr/bin/ter*
+      register: result
+    - debug:
+        var: result
+    - git:
+        clone: "yes"
+        repo: https://github.com/gahan-corporation/infrastructure.git
+        dest: /srv/infrastructure
+        version: v0.0.1
+      become: 'yes'
+    - file:
+        dest: /srv/infrastructure
+        owner: duchess
+        group: docker
+        recurse: "yes"
+        state: directory
 ...
