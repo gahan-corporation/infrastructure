@@ -38,5 +38,5 @@ resource "docker_container" "nginx" {
 }
 
 resource "docker_image" "di-nginx" {
-  name          = "gcorp/nginx:iss7" 
+  name          = "gcorp/nginx:latest" 
 }
