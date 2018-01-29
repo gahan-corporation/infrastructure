@@ -33,7 +33,7 @@
       service:
         name: "{{ item }}"
         state: started
-        enable: 'yes'
+        enabled: 'yes'
       with_items:
         - docker-tcp.socket
         - docker.socket
