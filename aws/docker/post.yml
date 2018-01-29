@@ -19,8 +19,38 @@
         dest: /home/duchess/.bash_profile
         state: present
         line: "source ~/.bashrc"
-    - shell: terraform init
-    - shell: terraform apply -auto-approve
+    - name: 'file copy docker-tcp.service'
+      copy:
+        src: docker-tcp.socket
+        dest: /lib/systemd/system/docker-tcp.socket
+      become: 'yes'
+    - name: 'service stop docker'
+      service:
+        name: docker
+        state: stopped
+      become: 'yes'
+    - name: 'service enable item.socket'
+      service:
+        name: "{{ item }}"
+        state: started
+        enable: 'yes'
+      with_items:
+        - docker-tcp.socket
+        - docker.socket
+        - docker
+      become: 'yes'
+    - name: 'docker -H tcp://127.0.0.1:2375 ps'
+      shell: docker -H tcp://127.0.0.1:2375 ps
+      register: result
+    - debug:
+        var: result
+    - name: "terraform init"
+      shell: terraform init
+      register: result
+    - debug:
+        var: result
+    - name: "terraform apply -auto-approve"
+      shell: terraform apply -auto-approve
       args:
         chdir: /srv/infrastructure/docker
 ...
