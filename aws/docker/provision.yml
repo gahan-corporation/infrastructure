@@ -57,6 +57,7 @@
         clone: "yes"
         repo: https://github.com/gahan-corporation/infrastructure.git
         dest: /srv/infrastructure
+        version: v0.0.1
       become: 'yes'
     - file:
         dest: /srv/infrastructure
