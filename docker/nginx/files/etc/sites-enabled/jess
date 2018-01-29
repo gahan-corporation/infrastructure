@@ -1,7 +1,7 @@
 server {
   listen 80;
-  listen 443 ssl default;
-  server_name xander.gahan-corporation.com;
+  listen 443 ssl;
+  server_name jess.gahan-corporation.com;
 
   # Tell nginx where to look for certs.
   ssl_certificate /etc/ssl/certs/star.gahan-corporation.crt;
@@ -17,11 +17,11 @@ server {
   }
 
   location /favicon.ico {
-    alias /srv/xander/xander/favicon.ico;
+    alias /srv/jess/jess/favicon.ico;
   }
 
   location / {
-    proxy_pass https://rsum-xander.herokuapp.com/;
+    proxy_pass https://rsum-jess.herokuapp.com/;
     proxy_set_header    X-Real-IP       $remote_addr;
     proxy_set_header    X-Forwarded-for $remote_addr;
     proxy_read_timeout 18000s;
