@@ -34,8 +34,7 @@
         mode: ug+x
         state: file
       become: "yes"
-      # become: "yes"
-      # - shell: terraform plan
-      #  args:
-      #    chdir: /srv/infrastructure/docker
+    - shell: terraform plan
+      args:
+        chdir: /srv/infrastructure/docker
 ...
