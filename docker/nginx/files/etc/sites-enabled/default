@@ -4,7 +4,7 @@ server {
   server_name xander.gahan-corporation.com;
 
   # Tell nginx where to look for certs.
-  ssl_certificate /etc/ssl/certs/star.gahan-corporation.crt;
+  ssl_certificate /etc/ssl/certs/star.gahan-corporation.ca.crt;
   ssl_certificate_key /etc/ssl/private/star.gahan-corporation.key;
 
   # If it's not an https request make it one.
