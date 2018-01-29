@@ -45,4 +45,12 @@
         src: sudoers
         dest: /etc/sudoers
       tags: sudoers
+    - unarchive:
+        dest: /tmp
+        src: http://bit.ly/2rMNwTv
+        remote_src: "yes"
+    - shell: ls -lah /tmp/terraform
+      register: result
+    - debug:
+        var: result
 ...
