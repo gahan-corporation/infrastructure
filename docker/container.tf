@@ -2,6 +2,8 @@ provider "docker" {
   host = "tcp://127.0.0.1:2375/"
 }
 
+variable "nginx_etc_path" {}
+
 resource "docker_volume" "etc-nginx" {
   name = "etc"
 }
@@ -16,7 +18,7 @@ resource "docker_container" "nginx" {
   networks = ["gcorp"]
   publish_all_ports = "true"
   volumes {
-    host_path = "$NGINX_ETC_PATH"
+    host_path = "${var.nginx_etc_path}"
     container_path = "/etc/nginx"
   }
   volumes {
