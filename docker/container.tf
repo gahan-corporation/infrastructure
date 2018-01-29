@@ -16,7 +16,7 @@ resource "docker_container" "nginx" {
   networks = ["gcorp"]
   publish_all_ports = "true"
   volumes {
-    host_path = "/Users/duchess/Documents/gahan-corporation/department-of-information/infrastructure/docker/nginx/files/etc"
+    host_path = "$NGINX_ETC_PATH"
     container_path = "/etc/nginx"
   }
   volumes {
