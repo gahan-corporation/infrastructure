@@ -39,13 +39,10 @@
         - docker.socket
         - docker
       become: 'yes'
-    - name: 'docker -H tcp://127.0.0.1:2375 ps'
-      shell: docker -H tcp://127.0.0.1:2375 ps
-      register: result
-    - debug:
-        var: result
     - name: "terraform init"
       shell: terraform init
+      args:
+        chdir: /srv/infrastructure/docker
       register: result
     - debug:
         var: result
