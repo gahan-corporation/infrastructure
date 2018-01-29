@@ -20,8 +20,8 @@ resource "docker_container" "nginx" {
     container_path = "/etc/nginx"
   }
   volumes {
-    host_path = "/etc/ansible/vault"
-    container_path = "/etc/ansible/vault"
+    host_path = "/etc/ansible"
+    container_path = "/etc/ansible"
   }
   ports {
     internal = "80"

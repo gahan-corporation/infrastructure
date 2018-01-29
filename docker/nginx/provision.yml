@@ -4,6 +4,9 @@
     - copy:
         src: /tmp/star.gahan-corporation.key
         dest: /etc/ssl/private/star.gahan-corporation.key
+    - copy:
+        src: /tmp/pass.keys
+        dest: /etc/ssl/private/pass.keys
     - debug:
-        var: hostvars 
+        var: hostvars
 ...
