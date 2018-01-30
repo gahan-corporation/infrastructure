@@ -1,6 +1,6 @@
 server {
   listen 80;
-  listen 443 ssl default;
+  listen 443 ssl;
   server_name xander.gahan-corporation.com;
 
   # Tell nginx where to look for certs.
