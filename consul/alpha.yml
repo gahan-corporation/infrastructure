@@ -1,0 +1,12 @@
+---
+- hosts: dev.gahan-corporation.com
+  become: "yes"
+  tasks:
+    - copy:
+        src: alpha.service
+        dest: /lib/systemd/system/consul.service
+    - service:
+        name: consul
+        state: started
+        enabled: "yes"
+...

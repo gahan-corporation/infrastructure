@@ -12,14 +12,4 @@
         dest: /usr/bin/consul
         mode: +x
         state: file
-- hosts: gahan-corporation.com
-  become: "yes"
-  tasks:
-    - copy:
-        src: actual.service
-        dest: /lib/systemd/system/consul.service
-    - service:
-        name: consul
-        state: started
-        enabled: "yes"
 ...

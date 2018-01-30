@@ -21,8 +21,10 @@ ExecStart=/usr/bin/docker run -d --rm \
                           -p 8400:8400 \
                           -p 8500:8500 \
                           -p 8600:8600 \
- --name consul \
-                                                consul agent -server -ui -node=gcorp-actual -recursor 8.8.8.8
+   --name consul \
+consul agent -server -ui -node=gcorp-actual \
+  -recursor "8.8.8.8" \
+  -retry-join "34.213.189.167"
 ExecReload=/usr/bin/docker restart consul
 ExecStop=/usr/bin/docker stop consul
 LimitNOFILE=1048576
