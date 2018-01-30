@@ -6,3 +6,4 @@ script:
   - docker run --rm nginx
 after_script:
   - docker stop nginx
+...
