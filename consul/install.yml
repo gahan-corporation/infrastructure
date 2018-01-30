@@ -12,4 +12,13 @@
         dest: /usr/bin/consul
         mode: +x
         state: file
+    - name: 'service install consul'
+      copy:
+        src: actual.service
+        dest: /lib/systemd/system/consul.service
+    - name: 'service state and enable'
+      service:
+        state: started
+        name: consul
+        enabled: "yes"
 ...
