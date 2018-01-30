@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+    bucket = "terraform.gahan-corporation.com"
+    key = "docker.tfstate"
+    region = "us-west-2"
+  }  
+}
+
 provider "docker" {
   host = "tcp://127.0.0.1:2375/"
 }
@@ -33,6 +41,21 @@ resource "docker_container" "nginx" {
   ports {
     internal = "443"
     external = "443"
+    ip = "0.0.0.0"
+  }
+}
+
+resource "docker_container" "postgres" {
+  image = "postgres:alpine"
+  name = "postgres"
+  networks = ["gcorp"]
+  volumes {
+    host_path = "${var.postgres_data_path}"
+    container_path = "/var/lib/postgresql/data"
+  }
+  ports {
+    internal = "5432"
+    external = "5432"
     ip = "0.0.0.0"
   }
 }
