@@ -59,6 +59,14 @@ resource "aws_instance" "do" {
   }
 }
 
+provider "aws" {
+  alias  = "west"
+  region = "us-west-2"
+  access_key = "${var.abio_aws_access_key_id}"
+  secret_key = "${var.abio_aws_secret_access_key}"
+}
+
 resource "aws_instance" "abio" {
+  provider = "aws.west"
   instance_id = "i-0b0b8c73e92aabc59"
 }
