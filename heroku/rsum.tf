@@ -15,6 +15,8 @@ resource "heroku_app" "dev" {
     AWS_ACCESS_KEY_ID = "${var.dev_aws_access_key_id}"
     AWS_SECRET_KEY_ID = "${var.dev_aws_secret_access_key}"
     DISABLE_COLLECTSTATIC = 1 
+    DJANGO_SETTINGS_MODULE = "rsum.settings"
+    RSUM_ENV = "dev"
   }
 
   buildpacks = [
