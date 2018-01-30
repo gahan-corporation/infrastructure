@@ -59,7 +59,7 @@ resource "heroku_app" "xander" {
 
   config_vars {
     AWS_ACCESS_KEY_ID = "${var.xander_aws_access_key_id}"
-    AWS_SECRET_KEY_ID = "${var.xadner_aws_secret_access_key}"
+    AWS_SECRET_KEY_ID = "${var.xander_aws_secret_access_key}"
     DISABLE_COLLECTSTATIC = 1 
     DJANGO_SETTINGS_MODULE = "rsum.settings"
     RSUM_ENV = "xander"
