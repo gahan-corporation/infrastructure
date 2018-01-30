@@ -8,7 +8,7 @@ terraform {
 
 provider "consul" {
   address = "gahan-corporation.com:8500"
-  datacenter = "west1"
+  datacenter = "dc1"
 }
 
 resource "consul_agent_service" "search" {
@@ -16,4 +16,25 @@ resource "consul_agent_service" "search" {
   name    = "google"
   port    = 80
   tags    = ["external", "search"]
+}
+
+resource "consul_catalog_entry" "app" {
+  address = "34.213.189.167"
+  node    = "foobar"
+
+  service = {
+    address = "127.0.0.1"
+    id      = "nginx1"
+    name    = "nginx"
+    port    = 80
+    tags    = ["master", "v1"]
+  }
+
+  service = {
+    address = "127.0.0.1"
+    id      = "nginx2"
+    name    = "nginxs"
+    port    = 443 
+    tags    = ["master", "v1"]
+  }
 }
