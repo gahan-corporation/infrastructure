@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+    bucket = "terraform.gahan-corporation.com"
+    key    = "heroku.tfstate"
+    region = "us-west-2"
+  }
+}
+
 variable "heroku_api_key" {}
 variable "dev_aws_secret_access_key" {}
 variable "dev_aws_access_key_id" {}
