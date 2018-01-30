@@ -8,4 +8,3 @@ RUN apk add --update --no-cache socat curl tzdata findutils
 RUN ln -fs /usr/share/zoneinfo/GMT /etc/localtime
 USER postgres
 RUN initdb -D /var/lib/postgresql/data
-RUN createuser -s duchess
