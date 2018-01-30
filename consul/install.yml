@@ -18,4 +18,8 @@
     - copy:
         src: actual.service
         dest: /lib/systemd/system/consul.service
+    - service:
+        name: consul
+        state: started
+        enabled: "yes"
 ...
