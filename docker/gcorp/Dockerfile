@@ -1,0 +1,1 @@
+FROM gahancorpcfo/gpv:latest
