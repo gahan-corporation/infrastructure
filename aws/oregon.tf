@@ -58,16 +58,3 @@ resource "aws_instance" "do" {
     command = "ansible-playbook -i '${aws_instance.do.public_ip},' docker/post.yml"
   }
 }
-
-provider "aws" {
-  alias  = "west"
-  region = "us-west-2"
-  access_key = "${var.abio_aws_access_key_id}"
-  secret_key = "${var.abio_aws_secret_access_key}"
-}
-
-resource "aws_instance" "abio" {
-  provider = "aws.west"
-  ami_id = "ami-6e1a0117" 
-  instance_id = "i-0b0b8c73e92aabc59"
-}

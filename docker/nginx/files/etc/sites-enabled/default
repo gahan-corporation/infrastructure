@@ -1,30 +1,36 @@
 server {
-  listen 80;
-  listen 443 ssl default;
-  server_name xander.gahan-corporation.com;
+  listen *:80;
+  listen *:443 ssl default;
+  server_name gahan-corporation.com *.gahan-corporation.com;
 
   # Tell nginx where to look for certs.
-  ssl_certificate /etc/ssl/certs/star.gahan-corporation.ca.crt;
+  ssl_certificate /etc/ssl/certs/star.gahan-corporation.crt;
   ssl_certificate_key /etc/ssl/private/star.gahan-corporation.key;
 
   # If it's not an https request make it one.
   if ($ssl_protocol = "") {
     return 301 https://$server_name$request_uri;
   }
-
-  location /static {
-    proxy_pass https://s3-us-west-2.amazonaws.com/rsum.gahan-corporation.com;
+  # your Django project's static files - amend as required 
+  location /favicon.ico {    
+    alias /etc/nginx/.gcorp/favicon.ico;
   }
 
-  location /favicon.ico {
-    alias /srv/xander/xander/favicon.ico;
-  }
-
-  location / {
-    proxy_pass https://rsum-xander.herokuapp.com/;
+  location /longpolling {
+    proxy_pass http://gcorp:8072;
+    proxy_set_header    Host            $server_name;
     proxy_set_header    X-Real-IP       $remote_addr;
     proxy_set_header    X-Forwarded-for $remote_addr;
-    proxy_read_timeout 18000s;
+    proxy_read_timeout 1800s;
+    client_max_body_size 1000M;
+  }
+  
+  location / {
+    proxy_pass http://gcorp:8069;
+    proxy_set_header    Host            $server_name;
+    proxy_set_header    X-Real-IP       $remote_addr;
+    proxy_set_header    X-Forwarded-for $remote_addr;
+    proxy_read_timeout 1800s;
     client_max_body_size 1000M;
   }
 }

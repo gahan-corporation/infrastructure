@@ -62,6 +62,12 @@ resource "docker_container" "postgres" {
   }
 }
 
+resource "docker_container" "gcorp" {
+  image = "gahancorpcfo/gpv"
+  name = "gcorp"
+  networks = ["gcorp"]
+}
+
 resource "docker_image" "di-nginx" {
   name          = "gcorp/nginx:latest" 
 }
