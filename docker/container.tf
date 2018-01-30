@@ -10,8 +10,6 @@ provider "docker" {
   host = "tcp://127.0.0.1:2375/"
 }
 
-variable "nginx_etc_path" {}
-
 resource "docker_volume" "etc-nginx" {
   name = "etc"
 }
