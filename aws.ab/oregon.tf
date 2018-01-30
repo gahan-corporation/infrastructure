@@ -16,7 +16,6 @@ provider "aws" {
 }
 
 resource "aws_instance" "abio" {
-  provider = "aws.west"
   ami_id = "ami-6e1a0117" 
   instance_id = "i-0b0b8c73e92aabc59"
 }
