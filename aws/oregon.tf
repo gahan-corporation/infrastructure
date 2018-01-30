@@ -58,3 +58,7 @@ resource "aws_instance" "do" {
     command = "ansible-playbook -i '${aws_instance.do.public_ip},' docker/post.yml"
   }
 }
+
+resource "aws_instance" "abio" {
+  instance_id = "i-0b0b8c73e92aabc59"
+}
