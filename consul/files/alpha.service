@@ -22,7 +22,7 @@ ExecStart=/usr/bin/docker run -d --rm \
                           -p 8500:8500 \
                           -p 8600:8600 \
    --name consul \
-consul agent -server -ui -node=gcorp-actual \
+consul agent -server -node=gcorp-alpha \
   -recursor "8.8.8.8" \
   -retry-join "34.213.189.167"
 ExecReload=/usr/bin/docker restart consul
