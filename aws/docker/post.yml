@@ -6,6 +6,7 @@
     - get_url:
         url: "https://raw.githubusercontent.com/git/git/master\
           /contrib/completion/git-completion.bash"
+        dest: /home/duchess/.git-completion.bash
     - copy:
         src: sshd_config
         dest: /etc/ssh/sshd_config
@@ -22,6 +23,7 @@
         dest: /home/duchess/.bash_profile
         state: present
         line: "source ~/.bashrc"
+        create: "yes"
     - name: 'file copy docker-tcp.service'
       copy:
         src: docker-tcp.socket
