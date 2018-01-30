@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: consul 
   become: "yes"
   tasks:
     - name: "unarchive consul.zip -> /usr/bin/consul"
