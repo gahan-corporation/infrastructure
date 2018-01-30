@@ -6,7 +6,10 @@ script:
   - docker run -d --rm nginx
   - docker build -t postgres docker/postgres
   - docker run -d --rm postgres
+  - docker build -t gcorp docker/gcorp
+  - docker run -d --rm gcorp
 after_script:
   - docker stop nginx
   - docker stop postgres
+  - docker stop gcorp
 ...
