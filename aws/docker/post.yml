@@ -3,6 +3,10 @@
   hosts: all
   tasks:
     - wait_for_connection:
+    - get_url:
+        url: "https://raw.githubusercontent.com/git/git/master\
+          /contrib/completion/git-completion.bash"
+        dest: /home/duchess/.git-completion.bash
     - copy:
         src: sshd_config
         dest: /etc/ssh/sshd_config
@@ -19,6 +23,7 @@
         dest: /home/duchess/.bash_profile
         state: present
         line: "source ~/.bashrc"
+        create: "yes"
     - name: 'file copy docker-tcp.service'
       copy:
         src: docker-tcp.socket
@@ -47,7 +52,9 @@
     - debug:
         var: result
     - name: "terraform apply -auto-approve"
-      shell: terraform apply -auto-approve
+      shell: >
+        TF_VAR_nginx_etc_path=/srv/infrastructure/docker/nginx/files/etc
+        terraform apply -auto-approve
       args:
         chdir: /srv/infrastructure/docker
 ...

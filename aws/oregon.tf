@@ -32,7 +32,7 @@ resource "aws_instance" "do" {
     volume_type = "standard"
   }
   tags {
-    Name = "docker"
+    Name = "docker.instance"
   }
   provisioner "remote-exec" {
     inline = [
