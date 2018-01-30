@@ -20,7 +20,7 @@ resource "aws_route53_record" "bare" {
 
 resource "aws_route53_record" "dev" {
   zone_id = "${data.aws_route53_zone.gc.zone_id}"
-  name = "${data.aws_route53_zone.gc.name}"
+  name = "dev.gahan-corporation.com"
   type = "A"
   ttl = "60"
   records = ["34.214.20.194"]
