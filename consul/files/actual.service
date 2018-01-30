@@ -10,7 +10,7 @@ Type=notify
 # exists and systemd currently does not support the cgroup feature set required
 # for containers run by docker
 # EnvironmentFile=-/etc/default/docker
-ExecStart=/usr/bin/docker run -d --rm \
+ExecStart=/usr/bin/docker run -d \
         -v /srv/consul:/consul/data \
         -v /etc/consul.d:/consul/config \
                           -p 8300:8300 \
