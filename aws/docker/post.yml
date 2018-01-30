@@ -47,7 +47,9 @@
     - debug:
         var: result
     - name: "terraform apply -auto-approve"
-      shell: terraform apply -auto-approve
+      shell: >
+        TF_VAR_nginx_etc_path=/srv/infrastructure/docker/nginx/files/etc
+        terraform apply -auto-approve
       args:
         chdir: /srv/infrastructure/docker
 ...
