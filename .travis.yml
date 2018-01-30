@@ -4,6 +4,9 @@ sudo: required
 script:
   - docker build -t nginx docker/nginx
   - docker run -d --rm nginx
+  - docker build -t postgres docker/postgres
+  - docker run -d --rm postgres
 after_script:
   - docker stop nginx
+  - docker stop postgres
 ...

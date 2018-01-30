@@ -53,7 +53,7 @@ resource "docker_container" "postgres" {
   }
   volumes {
     host_path = "${var.postgres_cert_dir}"
-    container_path = "/var/lib/postgresql/data/.postgresql"
+    container_path = "/var/lib/postgresql/.postgresql"
   }
   ports {
     internal = "5432"
