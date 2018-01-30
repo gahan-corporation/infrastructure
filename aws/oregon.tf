@@ -6,8 +6,6 @@ terraform {
   }
 }
 
-variable "nginx_etc_path" {}
-
 provider "aws" {
   access_key = ""
   secret_key = ""
@@ -34,8 +32,7 @@ resource "aws_instance" "do" {
     volume_type = "standard"
   }
   tags {
-    Name = "docker"
-    nginx_etc_path = "${var.nginx_etc_path}"
+    Name = "docker.instance"
   }
   provisioner "remote-exec" {
     inline = [
