@@ -6,7 +6,7 @@ resource "aws_route53_record" "all" {
   zone_id = "${data.aws_route53_zone.gc.zone_id}"
   name    = "*.${data.aws_route53_zone.gc.name}"
   type    = "A"
-  ttl     = "86400"
+  ttl     = "60"
   records = ["34.213.189.167"]
 }
 
@@ -14,7 +14,7 @@ resource "aws_route53_record" "bare" {
   zone_id = "${data.aws_route53_zone.gc.zone_id}"
   name    = "${data.aws_route53_zone.gc.name}"
   type    = "A"
-  ttl     = "86400"
+  ttl     = "60"
   records = ["34.213.189.167"]
 }
 
