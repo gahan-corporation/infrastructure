@@ -50,8 +50,12 @@ resource "docker_container" "postgres" {
   name = "postgres"
   networks = ["gcorp"]
   volumes {
-    host_path = "${var.postgres_data_path}"
+    host_path = "${var.postgres_data_dir}"
     container_path = "/var/lib/postgresql/data"
+  }
+  volumes {
+    host_path = "${var.postgres_cert_dir}"
+    container_path = "/var/lib/postgresql/data/.postgresql"
   }
   ports {
     internal = "5432"
