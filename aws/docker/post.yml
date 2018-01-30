@@ -3,6 +3,9 @@
   hosts: all
   tasks:
     - wait_for_connection:
+    - get_url:
+        url: "https://raw.githubusercontent.com/git/git/master\
+          /contrib/completion/git-completion.bash"
     - copy:
         src: sshd_config
         dest: /etc/ssh/sshd_config
