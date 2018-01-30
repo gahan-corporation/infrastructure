@@ -1,0 +1,9 @@
+---
+services: docker
+sudo: required
+script:
+  - docker build -t nginx docker/nginx
+  - docker run -d --rm nginx
+after_script:
+  - docker stop nginx
+...
