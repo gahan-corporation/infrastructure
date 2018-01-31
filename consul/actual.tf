@@ -6,6 +6,20 @@ terraform {
   }
 }
 
+provider "github" {
+  token        = "${var.github_token}"
+  organization = "${var.github_organization}"
+}
+
+resource "github_repository" "example" {
+  name        = "example"
+  description = "My awesome codebase"
+
+  provisioner "local-exec" {
+    command = "ansible-playbook provision/actual.yml"
+  }
+}
+
 provider "consul" {
   address = "gahan-corporation.com:8500"
   datacenter = "dc1"
@@ -20,7 +34,7 @@ resource "consul_agent_service" "search" {
 
 resource "consul_catalog_entry" "app" {
   address = "34.213.189.167"
-  node    = "foobar"
+  node    = "actual"
 
   service = {
     address = "127.0.0.1"
