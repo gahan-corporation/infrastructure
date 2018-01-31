@@ -10,21 +10,7 @@ Type=notify
 # exists and systemd currently does not support the cgroup feature set required
 # for containers run by docker
 # EnvironmentFile=-/etc/default/docker
-ExecStart=/usr/bin/docker run -d \
-        -v /srv/consul:/consul/data \
-        -v /etc/consul.d:/consul/config \
-                          -p 8300:8300 \
-                          -p 8301:8301/tcp \
-                          -p 8301:8301/udp \
-                          -p 8302:8302/tcp \
-                          -p 8302:8302/udp \
-                          -p 8400:8400 \
-                          -p 8500:8500 \
-                          -p 8600:8600 \
-   --name consul \
-consul agent -server -ui -node=gcorp-actual \
-  -recursor "8.8.8.8" \
-  -retry-join "34.213.189.167"
+ExecStart=docker run --net=host --rm --name=dev-consul -e CONSUL_BIND_INTERFACE=ens3 consul agent -bootstrap -advertise 34.213.189.167 -server -ui
 ExecReload=/usr/bin/docker restart consul
 ExecStop=/usr/bin/docker stop consul
 LimitNOFILE=1048576
