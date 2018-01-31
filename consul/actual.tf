@@ -6,20 +6,6 @@ terraform {
   }
 }
 
-provider "github" {
-  token        = "${var.github_token}"
-  organization = "${var.github_organization}"
-}
-
-resource "github_repository" "example" {
-  name        = "example"
-  description = "My awesome codebase"
-
-  provisioner "local-exec" {
-    command = "ansible-playbook provision/actual.yml"
-  }
-}
-
 provider "consul" {
   address = "gahan-corporation.com:8500"
   datacenter = "dc1"
