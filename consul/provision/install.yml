@@ -2,14 +2,3 @@
 - hosts: consul
   become: "yes"
   tasks:
-    - name: "unarchive consul.zip -> /usr/bin/consul"
-      unarchive:
-        src: http://bit.ly/2nnEJmC
-        dest: /usr/bin
-        copy: "no"
-    - name: "chmod +x /usr/bin/consul"
-      file:
-        dest: /usr/bin/consul
-        mode: +x
-        state: file
-...
