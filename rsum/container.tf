@@ -2,7 +2,7 @@ provider "docker" {
   host = "tcp://127.0.0.1:2375/"
 }
 
-resource "docker_volume" "etc-nginx" {
+resource "docker_volume" "nginx" {
   name = "etc"
 }
 
@@ -10,18 +10,14 @@ resource "docker_network" "rsum" {
   name = "rsum"
 }
 
-resource "docker_container" "rsum-docs" {
+resource "docker_container" "nginx" {
   image = "nginx:alpine"
-  name  = "rsum-docs"
+  name  = "docs"
   networks = ["rsum"]
   publish_all_ports = "true"
   volumes {
-    host_path = "${var.nginx_etc_path}"
-    container_path = "/etc/nginx"
-  }
-  volumes {
-    host_path = "/etc/ansible"
-    container_path = "/etc/ansible"
+    host_path = "${var.nginx_html_dir}"
+    container_path = "/usr/share/nginx/html"
   }
   ports {
     internal = "80"
@@ -54,7 +50,7 @@ resource "docker_container" "postgres" {
   }
 }
 
-resource "docker_container" "gcorp" {
+resource "docker_container" "rsum" {
   image = "gahancorpcfo/gpv"
   name = "gcorp"
   networks = ["gcorp"]
