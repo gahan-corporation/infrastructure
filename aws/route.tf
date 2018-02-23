@@ -18,6 +18,14 @@ resource "aws_route53_record" "bare" {
   records = ["34.213.189.167"]
 }
 
+resource "aws_route53_record" "dev" {
+  zone_id = "${data.aws_route53_zone.gc.zone_id}"
+  name = "dev.gahan-corporation.com"
+  type = "A"
+  ttl = "60"
+  records = ["34.214.20.194"]
+}
+
 resource "aws_route53_record" "aspmx" {
   zone_id = "${data.aws_route53_zone.gc.zone_id}"
   name    = "${data.aws_route53_zone.gc.name}"
