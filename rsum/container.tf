@@ -29,7 +29,7 @@ resource "docker_container" "nginx" {
 
 resource "docker_container" "postgres" {
   image = "postgres:alpine"
-  name = "postgres"
+  name = "rsum.db"
   networks = ["rsum"]
   ports {
     internal = "5432"
@@ -39,8 +39,8 @@ resource "docker_container" "postgres" {
 }
 
 resource "docker_container" "rsum" {
-  image = "python:alpine"
-  name = "rsum"
+  image = "python:3.6-alpine3.7"
+  name = "rsum.app"
   networks = ["rsum"]
 }
 
