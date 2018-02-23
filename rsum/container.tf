@@ -15,10 +15,6 @@ resource "docker_container" "nginx" {
   name  = "docs"
   networks = ["rsum"]
   publish_all_ports = "true"
-  volumes {
-    host_path = "${var.nginx_html_dir}"
-    container_path = "/usr/share/nginx/html"
-  }
   ports {
     internal = "80"
     external = "80"
@@ -34,15 +30,7 @@ resource "docker_container" "nginx" {
 resource "docker_container" "postgres" {
   image = "postgres:alpine"
   name = "postgres"
-  networks = ["gcorp"]
-  volumes {
-    host_path = "${var.postgres_data_dir}"
-    container_path = "/var/lib/postgresql/data"
-  }
-  volumes {
-    host_path = "${var.postgres_cert_dir}"
-    container_path = "/var/lib/postgresql/.postgresql"
-  }
+  networks = ["rsum"]
   ports {
     internal = "5432"
     external = "5432"
@@ -51,9 +39,9 @@ resource "docker_container" "postgres" {
 }
 
 resource "docker_container" "rsum" {
-  image = "gahancorpcfo/gpv"
-  name = "gcorp"
-  networks = ["gcorp"]
+  image = "python:alpine"
+  name = "rsum"
+  networks = ["rsum"]
 }
 
 resource "docker_image" "di-nginx" {
