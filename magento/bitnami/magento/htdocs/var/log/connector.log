@@ -28,3 +28,12 @@
 2018-03-11T02:05:37+00:00 INFO (6): Skipping ddg_automation_campaign job run
 2018-03-11T02:15:17+00:00 DEBUG (7): getAccountInfo ["GET ACCOUNT INFO for api user :  Authorization has been denied for this request."]
 2018-03-11T02:30:15+00:00 DEBUG (7): getAccountInfo ["GET ACCOUNT INFO for api user :  Authorization has been denied for this request."]
+2018-03-11T04:30:15+00:00 DEBUG (7): getAccountInfo ["GET ACCOUNT INFO for api user :  Authorization has been denied for this request."]
+2018-03-11T04:30:17+00:00 DEBUG (7): getAccountInfo ["GET ACCOUNT INFO for api user :  Authorization has been denied for this request."]
+2018-03-11T04:30:17+00:00 INFO (6): Skipping ddg_automation_importer job run
+2018-03-11T04:30:17+00:00 INFO (6): Skipping ddg_automation_status job run
+2018-03-11T04:30:17+00:00 INFO (6): Skipping ddg_automation_abandonedcarts job run
+2018-03-11T04:30:17+00:00 INFO (6): Skipping ddg_automation_reviews_and_wishlist job run
+2018-03-11T04:30:17+00:00 INFO (6): Skipping ddg_automation_campaign job run
+2018-03-11T04:30:17+00:00 INFO (6): Skipping ddg_automation_order_sync job run
+2018-03-11T04:30:17+00:00 INFO (6): Skipping ddg_automation_catalog_sync job run

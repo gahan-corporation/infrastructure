@@ -20,7 +20,6 @@ services:
       - MAGENTO_DATABASE_USER=bn_magento
       - MAGENTO_DATABASE_PASSWORD=magento_db_password
       - MAGENTO_DATABASE_NAME=bitnami_magento
-      - MAGENTO_HOST=magento.gahan-corporation.com
     ports:
       - '8080:80'
       - '9443:443'
