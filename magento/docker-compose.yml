@@ -11,7 +11,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   magento:
-    image: 'magento:latest'
+    image: 'bitnami/magento:latest'
     labels:
       kompose.service.type: nodeport
     environment:
