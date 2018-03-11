@@ -11,7 +11,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   magento:
-    image: 'bitnami/magento:latest'
+    image: 'magento:latest'
     labels:
       kompose.service.type: nodeport
     environment:
@@ -25,7 +25,7 @@ services:
       - '8080:80'
       - '9443:443'
     volumes:
-      - 'bitnami:/bitnami:rw'
+      - 'magento_data:/bitnami'
     depends_on:
       - mariadb
 volumes:
