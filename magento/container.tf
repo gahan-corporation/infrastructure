@@ -10,6 +10,10 @@ provider "docker" {
   host = "tcp://127.0.0.1:2375/"
 }
 
+resource "docker_network" "magento" {
+  name = "magento"
+}
+
 resource "docker_container" "mariadb" {
   image = "bitnami/mariadb:latest"
   name = "mariadb"
@@ -18,6 +22,9 @@ resource "docker_container" "mariadb" {
     "MARIADB_USER=bn_magento",
     "MARIADB_PASSWORD=magento_db_password",
     "MARIADB_DATABASE=bitnami_magento"
+  ]
+  networks = [
+    "magento"
   ]
 }
 
@@ -35,4 +42,7 @@ resource "docker_container" "magento" {
     internal = 80
     external = 8080
   }
+  networks = [
+    "magento"
+  ]
 }
