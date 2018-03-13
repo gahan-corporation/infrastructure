@@ -20,3 +20,19 @@ resource "docker_container" "mariadb" {
     "MARIADB_DATABASE=bitnami_magento"
   ]
 }
+
+resource "docker_container" "magento" {
+  image = "bitnami/magento:latest"
+  name = "magento"
+  env = [
+    "MARIADB_HOST=mariadb",
+    "MARIADB_PORT_NUMBER=3306",
+    "MAGENTO_DATABASE_USER=bn_magento",
+    "MAGENTO_DATABASE_PASSWORD=magento_db_password",
+    "MAGENTO_DATABASE_NAME=bitnami_magento"
+  ]
+  ports {
+    internal = 80
+    external = 8080
+  }
+}
