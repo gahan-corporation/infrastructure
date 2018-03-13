@@ -1,0 +1,1 @@
+magento setup:install --admin-firstname Xander --admin-lastname Harris --admin-user duchess --admin-email xander@gahancorporation.com --admin-password p9jtwdtu --cleanup-database --use-secure 0 --base-url http://magento.gahan-corporation.com
